@@ -1,0 +1,1289 @@
+{
+    "bpm": 92,
+    "author": "Fionn",
+    "instruments": [
+        {
+            "id": 0,
+            "name": "kick"
+        },
+        {
+            "id": 1,
+            "name": "s1"
+        },
+        {
+            "id": 2,
+            "name": "s2"
+        },
+        {
+            "id": 3,
+            "name": "s3"
+        },
+        {
+            "id": 4,
+            "name": "caixa"
+        },
+        {
+            "id": 5,
+            "name": "caixaRim"
+        },
+        {
+            "id": 6,
+            "name": "repinique"
+        },
+        {
+            "id": 7,
+            "name": "repiniqueRim"
+        },
+        {
+            "id": 22,
+            "name": "chocalhoLow"
+        },
+        {
+            "id": 23,
+            "name": "chocalhoHigh"
+        },
+        {
+            "id": 24,
+            "name": "agogoLow"
+        },
+        {
+            "id": 25,
+            "name": "agogoHigh"
+        },
+        {
+            "id": 26,
+            "name": "stick"
+        }
+    ],
+    "name": "Ainja",
+    "patterns": [
+        {
+            "size": 768,
+            "name": "intro-repi",
+            "notes": [
+                {
+                    "instrument": 7,
+                    "time": 0,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 6,
+                    "time": 48,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 144,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 6,
+                    "time": 240,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 336,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 6,
+                    "time": 432,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 528,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 624,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 6,
+                    "time": 648,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 672,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 6,
+                    "time": 720,
+                    "velocity": 0.8
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "intro-caixa",
+            "notes": [
+                {
+                    "instrument": 4,
+                    "time": 0,
+                    "velocity": 0.2
+                },
+                {
+                    "instrument": 4,
+                    "time": 48,
+                    "velocity": 0.19
+                },
+                {
+                    "instrument": 4,
+                    "time": 96,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 4,
+                    "time": 144,
+                    "velocity": 0.17
+                },
+                {
+                    "instrument": 4,
+                    "time": 192,
+                    "velocity": 0.18
+                },
+                {
+                    "instrument": 4,
+                    "time": 240,
+                    "velocity": 0.17
+                },
+                {
+                    "instrument": 4,
+                    "time": 288,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 4,
+                    "time": 336,
+                    "velocity": 0.18
+                },
+                {
+                    "instrument": 4,
+                    "time": 384,
+                    "velocity": 0.18
+                },
+                {
+                    "instrument": 4,
+                    "time": 432,
+                    "velocity": 0.17
+                },
+                {
+                    "instrument": 4,
+                    "time": 480,
+                    "velocity": 0.79
+                },
+                {
+                    "instrument": 4,
+                    "time": 528,
+                    "velocity": 0.16
+                },
+                {
+                    "instrument": 4,
+                    "time": 576,
+                    "velocity": 0.18
+                },
+                {
+                    "instrument": 4,
+                    "time": 624,
+                    "velocity": 0.18
+                },
+                {
+                    "instrument": 4,
+                    "time": 672,
+                    "velocity": 0.76
+                },
+                {
+                    "instrument": 4,
+                    "time": 720,
+                    "velocity": 0.14
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "intro-repi-end",
+            "notes": [
+                {
+                    "instrument": 7,
+                    "time": 0,
+                    "velocity": 1
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "repi-A",
+            "notes": [
+                {
+                    "instrument": 7,
+                    "time": 0,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 32,
+                    "velocity": 0.92
+                },
+                {
+                    "instrument": 7,
+                    "time": 64,
+                    "velocity": 0.9
+                },
+                {
+                    "instrument": 7,
+                    "time": 96,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 128,
+                    "velocity": 0.89
+                },
+                {
+                    "instrument": 7,
+                    "time": 160,
+                    "velocity": 0.88
+                },
+                {
+                    "instrument": 7,
+                    "time": 192,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 224,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 7,
+                    "time": 256,
+                    "velocity": 0.9
+                },
+                {
+                    "instrument": 7,
+                    "time": 288,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 320,
+                    "velocity": 0.85
+                },
+                {
+                    "instrument": 7,
+                    "time": 352,
+                    "velocity": 0.92
+                },
+                {
+                    "instrument": 1,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 2,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 1,
+                    "time": 432,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 2,
+                    "time": 432,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 432,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 1,
+                    "time": 528,
+                    "velocity": 0.9
+                },
+                {
+                    "instrument": 2,
+                    "time": 528,
+                    "velocity": 0.88
+                },
+                {
+                    "instrument": 3,
+                    "time": 528,
+                    "velocity": 0.88
+                },
+                {
+                    "instrument": 1,
+                    "time": 672,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 2,
+                    "time": 672,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 3,
+                    "time": 672,
+                    "velocity": 1
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "repi-B",
+            "notes": [
+                {
+                    "instrument": 7,
+                    "time": 0,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 3,
+                    "time": 96,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 120,
+                    "velocity": 0.85
+                },
+                {
+                    "instrument": 3,
+                    "time": 144,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 240,
+                    "velocity": 0.66
+                },
+                {
+                    "instrument": 7,
+                    "time": 264,
+                    "velocity": 0.84
+                },
+                {
+                    "instrument": 7,
+                    "time": 288,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 3,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 408,
+                    "velocity": 0.86
+                },
+                {
+                    "instrument": 3,
+                    "time": 432,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 528,
+                    "velocity": 0.72
+                },
+                {
+                    "instrument": 7,
+                    "time": 552,
+                    "velocity": 0.89
+                },
+                {
+                    "instrument": 7,
+                    "time": 576,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 672,
+                    "velocity": 0.89
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "tourne-repi-B",
+            "notes": [
+                {
+                    "instrument": 7,
+                    "time": 0,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 2,
+                    "time": 0,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 96,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 120,
+                    "velocity": 0.85
+                },
+                {
+                    "instrument": 3,
+                    "time": 144,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 1,
+                    "time": 192,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 240,
+                    "velocity": 0.66
+                },
+                {
+                    "instrument": 7,
+                    "time": 264,
+                    "velocity": 0.84
+                },
+                {
+                    "instrument": 7,
+                    "time": 288,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 3,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 2,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 1,
+                    "time": 384,
+                    "velocity": 0
+                },
+                {
+                    "instrument": 3,
+                    "time": 408,
+                    "velocity": 0.86
+                },
+                {
+                    "instrument": 3,
+                    "time": 432,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 1,
+                    "time": 432,
+                    "velocity": 0
+                },
+                {
+                    "instrument": 2,
+                    "time": 432,
+                    "velocity": 0
+                },
+                {
+                    "instrument": 7,
+                    "time": 528,
+                    "velocity": 0.72
+                },
+                {
+                    "instrument": 1,
+                    "time": 528,
+                    "velocity": 0
+                },
+                {
+                    "instrument": 2,
+                    "time": 528,
+                    "velocity": 0
+                },
+                {
+                    "instrument": 7,
+                    "time": 552,
+                    "velocity": 0.89
+                },
+                {
+                    "instrument": 7,
+                    "time": 576,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 1,
+                    "time": 576,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 7,
+                    "time": 672,
+                    "velocity": 0.89
+                },
+                {
+                    "instrument": 2,
+                    "time": 672,
+                    "velocity": 0
+                },
+                {
+                    "instrument": 1,
+                    "time": 672,
+                    "velocity": 0
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "repi-B-start",
+            "notes": [
+                {
+                    "instrument": 7,
+                    "time": 720,
+                    "velocity": 0.73
+                },
+                {
+                    "instrument": 7,
+                    "time": 744,
+                    "velocity": 0.87
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "end",
+            "notes": [
+                {
+                    "instrument": 1,
+                    "time": 0,
+                    "velocity": 0.57
+                },
+                {
+                    "instrument": 2,
+                    "time": 0,
+                    "velocity": 0.57
+                },
+                {
+                    "instrument": 3,
+                    "time": 0,
+                    "velocity": 0.57
+                },
+                {
+                    "instrument": 5,
+                    "time": 0,
+                    "velocity": 0.57
+                },
+                {
+                    "instrument": 7,
+                    "time": 0,
+                    "velocity": 0.57
+                },
+                {
+                    "instrument": 23,
+                    "time": 0,
+                    "velocity": 0.57
+                },
+                {
+                    "instrument": 25,
+                    "time": 0,
+                    "velocity": 0.57
+                },
+                {
+                    "instrument": 1,
+                    "time": 96,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 2,
+                    "time": 96,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 3,
+                    "time": 96,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 5,
+                    "time": 96,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 7,
+                    "time": 96,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 23,
+                    "time": 96,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 25,
+                    "time": 96,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 1,
+                    "time": 192,
+                    "velocity": 0.75
+                },
+                {
+                    "instrument": 2,
+                    "time": 192,
+                    "velocity": 0.75
+                },
+                {
+                    "instrument": 3,
+                    "time": 192,
+                    "velocity": 0.75
+                },
+                {
+                    "instrument": 5,
+                    "time": 192,
+                    "velocity": 0.75
+                },
+                {
+                    "instrument": 7,
+                    "time": 192,
+                    "velocity": 0.75
+                },
+                {
+                    "instrument": 23,
+                    "time": 192,
+                    "velocity": 0.75
+                },
+                {
+                    "instrument": 25,
+                    "time": 192,
+                    "velocity": 0.75
+                },
+                {
+                    "instrument": 1,
+                    "time": 288,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 2,
+                    "time": 288,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 3,
+                    "time": 288,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 5,
+                    "time": 288,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 7,
+                    "time": 288,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 23,
+                    "time": 288,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 25,
+                    "time": 288,
+                    "velocity": 0.87
+                },
+                {
+                    "instrument": 1,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 2,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 3,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 5,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 7,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 23,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 25,
+                    "time": 384,
+                    "velocity": 1
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "tourne-s3",
+            "notes": [
+                {
+                    "instrument": 3,
+                    "time": 0,
+                    "velocity": 0.98
+                },
+                {
+                    "instrument": 0,
+                    "time": 0,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 48,
+                    "velocity": 0.86
+                },
+                {
+                    "instrument": 3,
+                    "time": 96,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 144,
+                    "velocity": 0.64
+                },
+                {
+                    "instrument": 3,
+                    "time": 192,
+                    "velocity": 0.96
+                },
+                {
+                    "instrument": 3,
+                    "time": 240,
+                    "velocity": 0.56
+                },
+                {
+                    "instrument": 3,
+                    "time": 288,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 336,
+                    "velocity": 0.89
+                },
+                {
+                    "instrument": 3,
+                    "time": 384,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 0,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 3,
+                    "time": 672,
+                    "velocity": 0.8
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "tourne-s12",
+            "notes": [
+                {
+                    "instrument": 2,
+                    "time": 0,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 1,
+                    "time": 192,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 2,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 1,
+                    "time": 576,
+                    "velocity": 0.8
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "tourne-s12-B",
+            "notes": [
+                {
+                    "instrument": 2,
+                    "time": 0,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 1,
+                    "time": 192,
+                    "velocity": 0.8
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "tourne-caixa",
+            "notes": [
+                {
+                    "instrument": 4,
+                    "time": 0,
+                    "velocity": 0.22
+                },
+                {
+                    "instrument": 4,
+                    "time": 48,
+                    "velocity": 0.23
+                },
+                {
+                    "instrument": 4,
+                    "time": 96,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 4,
+                    "time": 144,
+                    "velocity": 0.24
+                },
+                {
+                    "instrument": 4,
+                    "time": 192,
+                    "velocity": 0.26
+                },
+                {
+                    "instrument": 4,
+                    "time": 240,
+                    "velocity": 0.28
+                },
+                {
+                    "instrument": 4,
+                    "time": 288,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 4,
+                    "time": 336,
+                    "velocity": 0.27
+                },
+                {
+                    "instrument": 4,
+                    "time": 384,
+                    "velocity": 0.28
+                },
+                {
+                    "instrument": 4,
+                    "time": 432,
+                    "velocity": 0.26
+                },
+                {
+                    "instrument": 4,
+                    "time": 480,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 4,
+                    "time": 528,
+                    "velocity": 0.26
+                },
+                {
+                    "instrument": 4,
+                    "time": 576,
+                    "velocity": 0.25
+                },
+                {
+                    "instrument": 4,
+                    "time": 624,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 5,
+                    "time": 672,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 4,
+                    "time": 720,
+                    "velocity": 0.18
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "tourne-agogo",
+            "notes": [
+                {
+                    "instrument": 24,
+                    "time": 0,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 25,
+                    "time": 96,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 24,
+                    "time": 192,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 25,
+                    "time": 288,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 24,
+                    "time": 384,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 25,
+                    "time": 432,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 25,
+                    "time": 528,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 24,
+                    "time": 576,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 25,
+                    "time": 672,
+                    "velocity": 0.8
+                }
+            ]
+        },
+        {
+            "size": 768,
+            "name": "tourne-chocalho",
+            "notes": [
+                {
+                    "instrument": 22,
+                    "time": 0,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 22,
+                    "time": 48,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 23,
+                    "time": 96,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 22,
+                    "time": 144,
+                    "velocity": 0.83
+                },
+                {
+                    "instrument": 22,
+                    "time": 192,
+                    "velocity": 0.73
+                },
+                {
+                    "instrument": 22,
+                    "time": 240,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 23,
+                    "time": 288,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 22,
+                    "time": 336,
+                    "velocity": 0.77
+                },
+                {
+                    "instrument": 22,
+                    "time": 384,
+                    "velocity": 0.65
+                },
+                {
+                    "instrument": 22,
+                    "time": 432,
+                    "velocity": 0.84
+                },
+                {
+                    "instrument": 23,
+                    "time": 480,
+                    "velocity": 0.8
+                },
+                {
+                    "instrument": 22,
+                    "time": 528,
+                    "velocity": 0.76
+                },
+                {
+                    "instrument": 22,
+                    "time": 576,
+                    "velocity": 0.73
+                },
+                {
+                    "instrument": 22,
+                    "time": 624,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 23,
+                    "time": 672,
+                    "velocity": 1
+                },
+                {
+                    "instrument": 22,
+                    "time": 720,
+                    "velocity": 0.78
+                }
+            ]
+        }
+    ],
+    "sequences": [
+        [
+            "intro-repi"
+        ],
+        [
+            "intro-repi-end",
+            "intro-caixa"
+        ],
+        [
+            "intro-caixa"
+        ],
+        [
+            "intro-caixa"
+        ],
+        [
+            "intro-caixa"
+        ],
+        [
+            "repi-A",
+            "intro-caixa"
+        ],
+        [
+            "intro-caixa",
+            "repi-A"
+        ],
+        [
+            "intro-caixa",
+            "repi-A"
+        ],
+        [
+            "intro-caixa",
+            "repi-A",
+            "repi-B-start"
+        ],
+        [
+            "intro-caixa",
+            "repi-B"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "repi-A",
+            "tourne-s12-B"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "repi-A",
+            "tourne-s12-B"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "repi-A",
+            "tourne-s12-B"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "repi-B-start",
+            "repi-A",
+            "tourne-s12-B"
+        ],
+        [
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-repi-B"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "repi-A",
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12-B"
+        ],
+        [
+            "repi-A",
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-chocalho",
+            "tourne-agogo",
+            "tourne-s12-B"
+        ],
+        [
+            "repi-A",
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12-B"
+        ],
+        [
+            "repi-A",
+            "repi-B-start",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s3",
+            "tourne-s12-B"
+        ],
+        [
+            "tourne-repi-B",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "tourne-s3",
+            "tourne-caixa",
+            "tourne-agogo",
+            "tourne-chocalho",
+            "tourne-s12"
+        ],
+        [
+            "end"
+        ]
+    ]
+}

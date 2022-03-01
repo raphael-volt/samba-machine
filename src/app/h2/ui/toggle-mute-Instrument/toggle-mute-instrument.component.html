@@ -1,0 +1,18 @@
+<ul class="list-group">
+  <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+    Tous les instruments
+    <div class="btn-group btn-group-sm ml-2">
+      <button (click)="muteAllChanged(true)" type="button" class="btn btn-secondary">muet</button>
+      <span class="group-sep"></span>
+      <button (click)="muteAllChanged(false)" type="button" class="btn btn-secondary">solo</button>
+    </div>
+  </li>
+  <li *ngFor="let i of instruments" class="list-group-item d-flex justify-content-between align-items-center">
+    {{i.name}}
+    <div class="btn-group btn-group-sm ml-2">
+      <button (click)="setMuted(i)" [class.active]="i.muted" type="button" class="btn btn-secondary">muet</button>
+      <span class="group-sep"></span>
+      <button (click)="setSolo(i)" [class.active]="i.solo" type="button" class="btn btn-secondary">solo</button>
+    </div>
+  </li>
+</ul>

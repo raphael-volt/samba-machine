@@ -1,0 +1,6 @@
+<ul class="nav bg-dark text-dark">
+  <li *ngFor="let r of routes" class="nav-item">
+    <a class="nav-link" routerLinkActive="active" [routerLink]="r.path">{{r.name}}</a>
+  </li>
+</ul>
+<router-outlet></router-outlet>

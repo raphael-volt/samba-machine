@@ -1,0 +1,57 @@
+<div *ngIf="songData" class="card-body d-flex gap-3 flex-column">
+  <div class="d-flex gap-3 flex-column">
+    <div>
+      <input #tl class="form-control-range" type="range" (input)="seek(tl.value)" [value]="progress" min="0" max="1"
+             step="0.001">
+    </div>
+    <div class="timeline-controller gap-4">
+      <div class="d-flex flex-column align-items-center">
+        <div class="form-check form-check-inline mb-2">
+          <input [checked]="startCounter" (change)="startCounterChange($event)" type="checkbox"
+                 class="form-check-input"
+                 id="counter">
+          <label for="counter" class="form-check-label">1|2|3|4</label>
+        </div>
+        <div class="d-flex flex-row gap-2 align-items-baseline">
+          <button class="btn btn-primary btn-play" (mousedown)="play()">Play</button>
+          <button [disabled]="!playing" [class.disabled]="!playing" class="btn btn-primary" (mousedown)="stop()">Stop
+          </button>
+        </div>
+      </div>
+      <div class="d-flex flex-column align-items-center">
+        <label for="bpm" class="">BPM: {{bpm}}</label>
+        <input class="form-control" id="bpm" bpmRange (bpmChange)="bpm = $event">
+      </div>
+      <div class="d-flex flex-column align-items-center">
+        <label for="loopStart">Boucle</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Début</span>
+          </div>
+          <select id="loopStart" (change)="loopStartChange($event)" class="form-control">
+            <option *ngFor="let i of measures" [optionSelected]="i==loopStart" [value]="i">{{i}}</option>
+          </select>
+          <div class="input-group-prepend">
+            <span class="input-group-text">Fin</span>
+          </div>
+          <select (change)="loopEndChange($event)" class="form-control">
+            <option *ngFor="let i of measures" [optionSelected]="i==loopEnd" [value]="i">{{i}}</option>
+          </select>
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input type="checkbox" (change)="loopStateChange($event)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-md-row flex-column gap-2 flex-wrap align-items-md-center align-items-stretch p-0">
+    <toggle-mute-instrument class="d-flex flex-grow-1 flex-md-grow-0"></toggle-mute-instrument>
+    <div class="flex-grow-1 d-flex flex-column align-items-center">
+      <span>Mesure: {{currentMeasure}}</span>
+      <span class="mb-2">Temps: {{beat + 1}}</span>
+      <step-view></step-view>
+    </div>
+  </div>
+</div>

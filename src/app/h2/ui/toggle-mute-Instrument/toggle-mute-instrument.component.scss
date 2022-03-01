@@ -1,0 +1,13 @@
+.group-sep {
+  display: inline-flex;
+  width: 1px;
+  background-color: white!important;
+  z-index: 999;
+  pointer-events: none;
+}
+.btn-group {
+  > button:nth-child(1) {
+    border: none!important;
+  }
+}
+.list-group { width: 100%}

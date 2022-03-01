@@ -1,0 +1,9 @@
+<div class="card my-md-4 my-0 max-900">
+  <div class="card-header">
+    <select class="custom-select custom-select-lg" (change)="songChanged($event)">
+      <option value="-1">Choisir un morceau</option>
+      <option *ngFor="let s of songs; let i=index;" [value]="i">{{s.name}}</option>
+    </select>
+  </div>
+  <h2-player [song]="song"></h2-player>
+</div>

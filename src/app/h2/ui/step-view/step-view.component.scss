@@ -1,0 +1,20 @@
+.foot-area {
+  height: 200px;
+  width: 312px;// 78 * 4
+  position: relative;
+  svg {
+    position: absolute;
+    top: 0;
+    right: auto;
+    transition-property: left;
+    transition-timing-function: ease-in;
+    &.on path {
+      fill: var(--primary);
+      transition: none;
+    }
+    path {
+      fill: currentColor;
+      transition: fill 60ms ease-in;
+    }
+  }
+}

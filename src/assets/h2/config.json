@@ -1,0 +1,22 @@
+{
+    "songs": [
+        {
+            "name": "Ainja",
+            "url": "songs/ainja.json"
+        },
+        {
+            "name": "Olodum",
+            "url": "songs/olodum.json"
+        },
+        {
+            "name": "Marcus",
+            "url": "songs/marcus.json"
+        }
+    ],
+    "drumKits": [
+        {
+            "name": "samba-kit",
+            "url": "drumkits/samba-kit/drumkit.json"
+        }
+    ]
+}

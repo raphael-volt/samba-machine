@@ -1,0 +1,145 @@
+
+$primary          : #7FB5B5;
+$secondary        : #F3A505;
+// Then add them to your custom theme-colors map, together with any additional colors you might need
+$theme-colors     : (
+  primary: $primary,
+  secondary: $secondary);
+
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.nav .nav-link.active {
+  text-decoration: underline;
+}
+body, html {
+  width: 100vw;
+  height: 100vh;
+}
+html {
+  overflow: hidden;
+}
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+div.card.max-900 {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+$breakpoints: ('sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px);
+
+$scales:0,
+0.25,
+0.5,
+1,
+1.5,
+2,
+3,
+4,
+5;
+$spacer:1rem !default;
+
+@mixin grid-theme {
+  @for $i from 1 to 13 {
+    .fx-grid-#{$i} {
+      display              : grid!important;
+      grid-template-columns: repeat($i, minmax(0, 1fr))!important;
+    }
+  }
+  @for $i from 1 to 13 {
+    .fx-col-#{$i} {
+      grid-column: span $i!important;
+    }
+  }
+  @each $name,
+  $value in $breakpoints {
+    @media screen and (min-width: $value) {
+
+      @for $i from 1 to 13 {
+        .fx-grid-#{$name}-#{$i} {
+          display              : grid!important;
+          grid-template-columns: repeat($i, minmax(0, 1fr))!important;
+        }
+      }
+
+      @for $i from 1 to 13 {
+        .fx-col-#{$name}-#{$i} {
+          grid-column: span $i!important;
+        }
+      }
+
+      @for $i from 0 through length($scales) - 1 {
+
+        .m-#{$name}-#{$i} {
+          margin: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .mt-#{$name}-#{$i} {
+          margin-top: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .mb-#{$name}-#{$i} {
+          margin-bottom: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .ml-#{$name}-#{$i} {
+          margin-left: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .mr-#{$name}-#{$i} {
+          margin-right: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .p-#{$name}-#{$i} {
+          padding: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .p-#{$name}-#{$i} {
+          padding: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .pt-#{$name}-#{$i} {
+          padding-top: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .pb-#{$name}-#{$i} {
+          padding-bottom: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .pl-#{$name}-#{$i} {
+          padding-left: $spacer * nth($scales, $i + 1)!important
+        }
+
+        .pr-#{$name}-#{$i} {
+          padding-right: $spacer * nth($scales, $i + 1)!important
+        }
+      }
+    }
+  }
+  @each $name,
+  $value in $breakpoints {
+    @for $i from 0 through length($scales) - 1 {
+      .gap-#{$i} {
+        gap: $spacer * nth($scales, $i + 1) !important
+      }
+    }
+    @media screen and (min-width: $value) {
+      @for $i from 0 through length($scales) - 1 {
+        .gap-#{$name}-#{$i} {
+          gap: $spacer * nth($scales, $i + 1)!important
+        }
+      }
+    }
+  }
+}
+
+@include grid-theme();

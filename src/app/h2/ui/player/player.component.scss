@@ -1,0 +1,14 @@
+.bpm-range {
+  min-width: 250px!important;
+  width: auto!important;
+}
+.btn-play {
+  width: auto!important;
+  min-width: 80px;
+}
+.timeline-controller {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
