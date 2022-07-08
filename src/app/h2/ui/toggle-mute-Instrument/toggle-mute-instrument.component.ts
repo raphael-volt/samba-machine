@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {DrumKitService} from "../../drum-kit.service";
 import {sortResult} from "../../core/array-utils";
 
@@ -17,6 +17,8 @@ type InstrumentsMuteList = InstrumentsMute[]
 })
 export class ToggleMuteInstrumentComponent {
 
+  private activatedOnSolo: InstrumentsMute[] = []
+
   instruments: InstrumentsMuteList
 
   constructor(private dks: DrumKitService) {
@@ -28,10 +30,12 @@ export class ToggleMuteInstrumentComponent {
     const muted: boolean = false
     const solo: boolean = false
     const list = dks.instrumentsList
+
     for (const id in list) {
-      const instrument = dks.getInstrument(+id)
+      const instrument = dks.midiToInstrument(+id)
       instruments.push({name: instrument.name, instruments: [+id, ...list[id]], muted, solo})
     }
+
     instruments.sort((a, b) => sortResult(a.instruments[0], b.instruments[0]))
     this.instruments = instruments
   }
@@ -45,21 +49,22 @@ export class ToggleMuteInstrumentComponent {
     this.dks.setMuted(instrument.instruments[0], muted)
   }
 
-  private activatedOnSolo: InstrumentsMute[] = []
 
   private checkSolo() {
     const inSolo = this.instruments.find(i => i.solo)
     if (inSolo)
       inSolo.solo = false
   }
+
   setSolo(instrument: InstrumentsMute) {
+
     const dks = this.dks
     const solo: boolean = !instrument.solo
     if (solo) {
       this.checkSolo()
     }
     instrument.solo = solo
-    const id = instrument.instruments[0]
+    const midi = instrument.instruments[0]
     const instruments = this.instruments
     if (solo) {
 
@@ -72,7 +77,7 @@ export class ToggleMuteInstrumentComponent {
       }
       if (instrument.muted) {
         instrument.muted = false
-        dks.setMuted(id, false)
+        dks.setMuted(midi, false)
       }
     } else {
       for (instrument of this.activatedOnSolo) {

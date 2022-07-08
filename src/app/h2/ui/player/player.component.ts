@@ -15,11 +15,9 @@ import {Transport} from "tone";
 export class PlayerComponent implements OnInit, OnDestroy {
 
   private sub: Subscription
-  private loopActive: boolean = false
 
   progress: number = 0;
-  songData: Song
-  startCounter: boolean = false;
+  songData: Partial<Song>
   playing: boolean = false;
   bpm: number;
   measures: number[];
@@ -31,57 +29,59 @@ export class PlayerComponent implements OnInit, OnDestroy {
   @Input()
   set song(value: ConfigLink) {
     if (!value) return
-    this.songService.getSong(value.url).pipe(first()).subscribe(
-      song => {
-        this.songData = song
-        this.player.song = song
-        const measures: number[] = []
-        let i: number = 1
-        for (const sequence of song.sequences) {
-          measures.push(i++)
-        }
-        this.progress = 0
-        this.currentMeasure = 1
-        this.beat = 0
-        this.measures = measures
-        this.loopStart = 1
-        this.loopEnd = i - 1
-        this.cdr.detectChanges()
-      }
-    )
+    this.midiPath = value.url
   }
+
+  private _midiPath: string
+  public set midiPath(value: string) {
+    this._midiPath = value
+    this.player.midiPath = value
+    this.songData = {name: value}
+  }
+
 
   constructor(private cdr: ChangeDetectorRef,
               private transport: TransportService,
               private songService: SongService,
               private player: PlayerService) {
-  }
-
-  ngOnInit(): void {
-    document.body.addEventListener("keydown", ev => {
-      if (ev.code == 'Space') {
-        this.transport.toggle()
-      }
-    })
     this.sub = this.player.progress.subscribe(e => {
-      if(e.kind == 'end') {
-        if(! this.loopActive) {
-          this.stop()
+      if(e.kind== 'scheduled') {
+
+        const n = this.loopEnd = this.player.numMeasure + 1
+        let i: number = 0
+        const measures = []
+        for (i=1; i<n; i++) {
+          measures.push(i)
         }
-      }
-      if (e.kind == "count") {
-        e.ratio = (e.ratio + 1) / 4
+        this.progress = 0
         this.currentMeasure = 1
+        this.beat = 1
+        this.measures = measures
+        this.loopStart = 0
+        this.loopEnd = n-1
+        this.bpm = Math.round(Transport.bpm.value)
+        this.cdr.detectChanges()
       }
-      else
-        this.currentMeasure = e.measure
-      this.beat =  e.beat
+      this.currentMeasure = e.measure
+      this.beat = e.beat
       this.progress = e.ratio
       this.cdr.detectChanges()
+
     })
+  }
+
+  private handelKeys = (event: KeyboardEvent) => {
+    if (event.code == 'Space') {
+      this.transport.toggle()
+    }
+  }
+  ngOnInit(): void {
+    document.body.addEventListener("keydown", this.handelKeys)
   }
 
   ngOnDestroy(): void {
+    document.body.removeEventListener("keydown", this.handelKeys)
+
     this.transport.cancel()
     if (this.sub)
       this.sub.unsubscribe()
@@ -97,23 +97,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.player.seek(+value)
   }
 
-  startCounterChange(event: Event) {
-    const b = (event.currentTarget as HTMLInputElement).checked
-    this.startCounter = b
-    this.player.playCount = b
-  }
-
   stop() {
     this.player.stop()
     this.currentMeasure = 1
-    this.beat = 1
+    this.beat = 0
     this.progress = 0
     this.playing = false
     this.cdr.detectChanges()
   }
 
   loopStartChange($event: Event) {
-    let start = +($event.currentTarget as HTMLSelectElement).value
+    let start = +($event.currentTarget as HTMLSelectElement).value - 1
     const end = this.loopEnd
     this.loopStart = start
     if (end < start) {
@@ -132,23 +126,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.checkLoopChange()
   }
 
-
-  loopStateChange($event: Event) {
-    const active = ($event.currentTarget as HTMLInputElement).checked
-    this.loopActive = active
-    Transport.loop = active
-    this.checkLoopChange()
-
-  }
-
   checkLoopChange() {
-    if (this.loopActive) {
-      let loopStart: number = this.loopStart
-      if(loopStart == 1 && this.startCounter)
-        loopStart = 0
-      const start = `${loopStart}:0:0`
-      Transport.setLoopPoints(start, `${this.loopEnd+1}:0:0`)
-      Transport.position = start
-    }
+    let loopStart: number = this.loopStart
+    const start = `${loopStart}:0:0`
+    Transport.setLoopPoints(start, `${this.loopEnd}:0:0`)
+    Transport.position = start
   }
 }
