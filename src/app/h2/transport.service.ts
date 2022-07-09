@@ -80,8 +80,7 @@ export class TransportService {
         this._startFlag = false
         this.nextReady = true
         resolve()
-        if(Transport.state != 'started')
-          this.start()
+        this.start(undefined, '0:0:0')
       })
     })
   }
