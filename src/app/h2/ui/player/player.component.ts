@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {SongService} from "../../song.service";
 import {first, Subscription} from "rxjs";
-import {PlayerService} from "../../player.service";
+import {BarTime, PlayerService} from "../../player.service";
 import {ConfigLink, Song} from "../../core/song";
 import {TransportService} from "../../transport.service";
-import {Transport} from "tone";
+import {Time, Transport} from "tone";
 
 @Component({
   selector: 'h2-player',
@@ -15,73 +15,74 @@ import {Transport} from "tone";
 export class PlayerComponent implements OnInit, OnDestroy {
 
   private sub: Subscription
-  private loopActive: boolean = false
 
   progress: number = 0;
-  songData: Song
-  startCounter: boolean = false;
+  songData: Partial<Song>
   playing: boolean = false;
   bpm: number;
-  measures: number[];
-  loopStart: number;
-  loopEnd: number;
+  measures: BarTime[];
+  loopStart: BarTime;
+  loopEnd: BarTime;
   beat: number = 0
   currentMeasure: number = 1
 
   @Input()
   set song(value: ConfigLink) {
     if (!value) return
-    this.songService.getSong(value.url).pipe(first()).subscribe(
-      song => {
-        this.songData = song
-        this.player.song = song
-        const measures: number[] = []
-        let i: number = 1
-        for (const sequence of song.sequences) {
-          measures.push(i++)
-        }
-        this.progress = 0
-        this.currentMeasure = 1
-        this.beat = 0
-        this.measures = measures
-        this.loopStart = 1
-        this.loopEnd = i - 1
-        this.cdr.detectChanges()
-      }
-    )
+    this.midiPath = value.url
   }
+
+  private _midiPath: string
+  public set midiPath(value: string) {
+    this._midiPath = value
+    this.player.midiPath = value
+    this.songData = {name: value}
+  }
+
 
   constructor(private cdr: ChangeDetectorRef,
               private transport: TransportService,
               private songService: SongService,
               private player: PlayerService) {
+    this.sub = this.player.progress.subscribe(e => {
+      if (e.kind == 'scheduled') {
+        const bars = this.player.barTimes
+        this.barTimes = bars
+        const lastBar = bars[bars.length - 1]
+        this.loopEnd = lastBar
+        this.loopStart = bars[0]
+
+        this.progress = 0
+        this.currentMeasure = 1
+        this.beat = 1
+        this.measures = bars
+
+        this.bpm = Math.round(Transport.bpm.value)
+        this.cdr.detectChanges()
+      }
+      this.currentMeasure = e.measure
+      this.beat = e.beat
+      this.progress = e.ratio
+      this.cdr.detectChanges()
+
+    })
+  }
+
+  private barTimes: BarTime[]
+
+  private handelKeys = (event: KeyboardEvent) => {
+    if (event.code == 'Space') {
+      this.transport.toggle()
+    }
   }
 
   ngOnInit(): void {
-    document.body.addEventListener("keydown", ev => {
-      if (ev.code == 'Space') {
-        this.transport.toggle()
-      }
-    })
-    this.sub = this.player.progress.subscribe(e => {
-      if(e.kind == 'end') {
-        if(! this.loopActive) {
-          this.stop()
-        }
-      }
-      if (e.kind == "count") {
-        e.ratio = (e.ratio + 1) / 4
-        this.currentMeasure = 1
-      }
-      else
-        this.currentMeasure = e.measure
-      this.beat =  e.beat
-      this.progress = e.ratio
-      this.cdr.detectChanges()
-    })
+    document.body.addEventListener("keydown", this.handelKeys)
   }
 
   ngOnDestroy(): void {
+    document.body.removeEventListener("keydown", this.handelKeys)
+
     this.transport.cancel()
     if (this.sub)
       this.sub.unsubscribe()
@@ -97,16 +98,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.player.seek(+value)
   }
 
-  startCounterChange(event: Event) {
-    const b = (event.currentTarget as HTMLInputElement).checked
-    this.startCounter = b
-    this.player.playCount = b
-  }
-
   stop() {
     this.player.stop()
     this.currentMeasure = 1
-    this.beat = 1
+    this.beat = 0
     this.progress = 0
     this.playing = false
     this.cdr.detectChanges()
@@ -114,41 +109,37 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   loopStartChange($event: Event) {
     let start = +($event.currentTarget as HTMLSelectElement).value
+    this.loopStart = this.getBarTime(start)
     const end = this.loopEnd
-    this.loopStart = start
-    if (end < start) {
-      this.loopEnd = start
+    if (end.bar < start) {
+      this.loopEnd = this.loopStart
     }
     this.checkLoopChange()
   }
+
+  private getBarTime = (bar: number) => this.barTimes.find(b => b.bar == bar)
 
   loopEndChange($event: Event) {
     const end = +($event.currentTarget as HTMLSelectElement).value
     const start = this.loopStart
-    this.loopEnd = end
-    if (start > end) {
-      this.loopStart = end
+    this.loopEnd = this.getBarTime(end)
+    if (start.bar > end) {
+      this.loopStart = this.loopEnd
     }
     this.checkLoopChange()
-  }
-
-
-  loopStateChange($event: Event) {
-    const active = ($event.currentTarget as HTMLInputElement).checked
-    this.loopActive = active
-    Transport.loop = active
-    this.checkLoopChange()
-
   }
 
   checkLoopChange() {
-    if (this.loopActive) {
-      let loopStart: number = this.loopStart
-      if(loopStart == 1 && this.startCounter)
-        loopStart = 0
-      const start = `${loopStart}:0:0`
-      Transport.setLoopPoints(start, `${this.loopEnd+1}:0:0`)
-      Transport.position = start
+    console.log(this.loopStart, this.loopEnd)
+    let loopStart: BarTime = this.loopStart
+    let loopEnd: BarTime = this.loopEnd
+    let endBar: number = loopEnd.bar + 1
+    let next : BarTime = this.getBarTime(endBar)
+    if (!next) {
+      next = { bar: endBar, ticks: loopEnd.ticks + 192*4 }
     }
+    const start = Time(loopStart.ticks, 'i').toBarsBeatsSixteenths()
+    Transport.setLoopPoints(start, Time(next.ticks, 'i').toBarsBeatsSixteenths())
+    Transport.position = start
   }
 }

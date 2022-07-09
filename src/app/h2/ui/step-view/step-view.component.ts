@@ -28,9 +28,8 @@ export class StepViewComponent implements AfterViewInit, OnDestroy {
   private transportStateChange = (state: TransportState) => {
     switch (state) {
       case "scheduled":
-        return this.createLoop()
       case "canceled":
-        return this.updatePosition(-1)
+        this.updatePosition(-1)
     }
   }
 
@@ -104,18 +103,12 @@ export class StepViewComponent implements AfterViewInit, OnDestroy {
       if (e.kind == 'end' || e.kind == 'stop') {
         this.updatePosition(-1)
       }
+      else
+        this.updatePosition(e.beat)
     })
 
     this.sub = transport.state.subscribe(this.transportStateChange)
 
     this.updatePosition(-1)
-    this.createLoop()
-  }
-
-  private createLoop() {
-    new Loop(t => {
-      const beat = +Transport.position.toString().split(':')[1]
-      this.updatePosition(beat)
-    }, '4n').start()
   }
 }

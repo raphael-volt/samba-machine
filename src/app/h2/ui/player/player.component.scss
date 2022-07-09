@@ -1,6 +1,6 @@
 .bpm-range {
   min-width: 250px!important;
-  width: auto!important;
+  width: 100%!important;
 }
 .btn-play {
   width: auto!important;
@@ -10,5 +10,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  align-items: end;
+  justify-content: center;
+}
+.bpm-controller {
+  flex: 1 1;
+  align-self: stretch;
+  justify-self: stretch;
 }

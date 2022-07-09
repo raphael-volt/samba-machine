@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
 import {DrumKitService} from "./drum-kit.service";
-import {Loop, Time, Transport} from "tone";
+import {Time, Transport} from "tone";
 import {TransportService} from "./transport.service";
-import {Subject} from "rxjs";
-import {createCounterPart, createSongParts} from "./core/song-loop";
-import {Song} from "./core/song";
-import {TickValues, toTicks} from "./core/time.utils";
+import {Subject, Subscription} from "rxjs";
+import {MidiSong, MidiSongService} from "./midi-song.service";
 
 export type SongProgressKind = 'scheduled' | 'stop' | 'begin' | 'count' | 'end' | 'measure' | 'progress'
 export type SongProgress = {
@@ -14,11 +12,13 @@ export type SongProgress = {
   ratio: number,
   beat: number
 }
+export type BarTime = { ticks: number, bar: number }
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
+
 
   private _loop: boolean = false
 
@@ -54,23 +54,64 @@ export class PlayerService {
     return `${this._playCount ? 0 : 1}:0:0`
   }
 
-  private _song: Song
-  set song(song: Song) {
-    if (this._song) {
-      this.transport.cancel()
-    }
-    this.initSong(song)
+  private _song: MidiSong
+
+  private _midiPath: string
+  public numMeasure: number
+
+  get barTimes(): BarTime[] {
+    return this._song.barsBeatsEvents.filter(e=>(e.beat == 0)).map(e=>({ticks: e.time.toTicks(), bar: e.bar}))
+  }
+  set midiPath(value: string) {
+    if (value == this._midiPath) return
+    this._midiPath = value;
+    if (!value) return
+    Transport.stop()
+    Transport.cancel()
+    this.currentMeasure = 0
+    this.currentBeat = 0
+    this._progress = 0
+    this._playing = false
+    this.midi.getSong(value).then(song => {
+      this._song = song
+      const end = song.lastBarBeatEvent
+      const numMeasure = end.bar
+      this.numMeasure = numMeasure
+      const numTicks = end.time.toTicks()
+      this.numTicks = numTicks
+      this.unsubscribeSong()
+      this.songSubscription = song.event.subscribe(e=>{
+        this.currentMeasure = e.bar + 1
+        this.currentBeat = e.beat
+        this._progress = e.time.toTicks() / numTicks
+        this.nextEvent('progress')
+      })
+      Transport.loop = true
+      Transport.loopStart = 0
+      Transport.loopEnd = end.time.toBarsBeatsSixteenths()
+
+      this.transport.bpm = song.bpm
+      this.transport.scheduled()
+      this.nextEvent('scheduled', 0)
+    })
   }
 
+  private clickFlg = false
 
-  constructor(private drumKit: DrumKitService, private transport: TransportService) {
+  constructor(private drumKit: DrumKitService, private transport: TransportService, private midi: MidiSongService) {
   }
+
 
   play(time?: any) {
-    this.transport.handleClick().then(() => {
-      this.transport.start(undefined, this.startPosition)
-      this._playing = true
-    })
+    if(! this.clickFlg) {
+      this.transport.handleClick().then(() => {
+        this.clickFlg = true
+        this.play(time)
+      })
+      return
+    }
+    this.transport.start(undefined,'0:0:0')
+    this._playing = true
   }
 
   pause() {
@@ -87,64 +128,34 @@ export class PlayerService {
   stop() {
     this._progress = 0
     this.currentBeat = 1
-    this.currentMeasure = 1
+    this.currentMeasure = 0
     this.transport.stop()
     this._playing = false
+    Transport.stop()
+    Transport.position = '0:0:0'
     this.nextEvent('stop')
+
   }
 
   seek(ratio: number) {
     const ticks: number = Math.floor(ratio * this.numTicks)
     this._progress = ratio
-    Transport.position = toTicks(ticks + TickValues.BAR).toBarsBeatsSixteenths()
-  }
-
-  cancel() {
-    this.transport.cancel()
-    this._song = null
-  }
-
-  private startParts() {
-    if (Transport.state != 'started') {
-      this.transport.start(0, 0)
+    if(this._midiPath) {
+      Transport.position = Time(ticks, 'i').toBarsBeatsSixteenths()
     }
   }
 
-  private initSong(song: Song) {
-    this._song = song
-    this.transport.bpm = song.bpm
-    this._progress = 0
-    this.currentMeasure = 0
-    const numSequences = song.sequences.length
-    const numBars = numSequences + 1
-    const end = toTicks(TickValues.BAR * numBars).toBarsBeatsSixteenths()
-    this.numTicks = numSequences * TickValues.BAR
-
-    createCounterPart((time, event) => {
-      this.nextEvent('count', event.time.toTicks() / TickValues.BEAT)
-      this.drumKit.start(time, event)
-    })
-    createSongParts(this.drumKit.start, song, TickValues.BAR)
-
-    new Loop(time => {
-      const tp = Time(Transport.position)
-      const bb16 = tp.toBarsBeatsSixteenths().split(':').map(v => +v)
-      const cm = bb16[0]
-      if (bb16[0] != this.currentMeasure)
-        this.currentMeasure = bb16[0]
-      if (bb16[1] != this.currentBeat)
-        this.currentBeat = bb16[1]
-
-      this._progress = (tp.toTicks() - TickValues.BAR) / this.numTicks
-      this.nextEvent('progress')
-      if (cm == numBars) {
-        this.stop()
-        this.nextEvent('end')
-      }
-    }, '16n').start(toTicks(TickValues.BAR).toBarsBeatsSixteenths())
-      .stop(toTicks(TickValues.BAR * numBars + TickValues.SIXTEENTH).toBarsBeatsSixteenths())
-    Transport.loopEnd = end
-    this.transport.scheduled()
+  private songSubscription: Subscription
+  private unsubscribeSong() {
+    if(this.songSubscription) {
+      this.songSubscription.unsubscribe()
+      this.songSubscription = null
+    }
+  }
+  cancel() {
+    this.transport.cancel()
+    this.unsubscribeSong()
+    this._song = null
   }
 
   private nextEvent(kind: SongProgressKind, ratio: number = -1) {
